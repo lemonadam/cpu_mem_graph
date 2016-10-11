@@ -1,5 +1,5 @@
 #!/bin/bash
-#demo: sh cpu.sh com.ss.android.ugc.live 3  
+#demo: sh cpu_mem.sh packagename delaytime
 apkname=$1
 delay=$2
 
