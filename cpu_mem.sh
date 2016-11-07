@@ -79,7 +79,11 @@ do
             elif [[ ! `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
-               
+            
+            elif [[ `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'|awk '{print $3}'` = "0" ]]; then
+               echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $8}'`"]," >> ${device_serialname}_memN.log &
+               echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $8}'`"]," >> ${device_serialname}_memD.log &    
+            
             else
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap' |grep -v ':' |awk '{print $3}'`"]," >> ${device_serialname}_memN.log &
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik Heap' |awk '{print $3}'`"]," >> ${device_serialname}_memD.log & 
@@ -152,7 +156,11 @@ do
                     elif [[ ! `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
-                       
+                    
+                    elif [[ `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'|awk '{print $3}'` = "0" ]]; then
+                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $8}'`"]," >> ${device_serialname}_memN.log &
+                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $8}'`"]," >> ${device_serialname}_memD.log &  
+
                     else
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap' |grep -v ':' |awk '{print $3}'`"]," >> ${device_serialname}_memN.log &
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik Heap' |awk '{print $3}'`"]," >> ${device_serialname}_memD.log & 
@@ -206,7 +214,11 @@ do
                 elif [[ ! `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
-                   
+                
+                elif [[ `adb  -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap'|awk '{print $3}'` = "0" ]]; then
+                  echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $8}'`"]," >> ${device_serialname}_memN.log &
+                  echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $8}'`"]," >> ${device_serialname}_memD.log &  
+ 
                 else
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native Heap' |grep -v ':' |awk '{print $3}'`"]," >> ${device_serialname}_memN.log &
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik Heap' |awk '{print $3}'`"]," >> ${device_serialname}_memD.log & 
