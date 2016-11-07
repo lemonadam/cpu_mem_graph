@@ -76,7 +76,7 @@ do
                echo "[$i,0],"  >> ${device_serialname}_memN.log & 
                echo "[$i,0],"  >> ${device_serialname}_memD.log & 
 
-            elif [[ ! `adb shell dumpsys meminfo com.ss.android.essay.joke | grep 'Native Heap'` ]]; then
+            elif [[ ! `adb shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
                
@@ -149,7 +149,7 @@ do
                        echo "[$i,0],"  >> ${device_serialname}_memN.log & 
                        echo "[$i,0],"  >> ${device_serialname}_memD.log & 
 
-                    elif [[ ! `adb shell dumpsys meminfo com.ss.android.essay.joke | grep 'Native Heap'` ]]; then
+                    elif [[ ! `adb shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                        echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
                        
@@ -203,7 +203,7 @@ do
                    echo "[$i,0],"  >> ${device_serialname}_memN.log & 
                    echo "[$i,0],"  >> ${device_serialname}_memD.log & 
 
-                elif [[ ! `adb shell dumpsys meminfo com.ss.android.essay.joke | grep 'Native Heap'` ]]; then
+                elif [[ ! `adb shell dumpsys meminfo $1 | grep 'Native Heap'` ]]; then
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1 | grep 'Native' |grep -v ':' |awk '{print $6}'`"]," >> ${device_serialname}_memN.log &
                    echo "["$i","`adb -s ${device_serialname} shell dumpsys meminfo $1| grep 'Dalvik' |awk '{print $6}'`"]," >> ${device_serialname}_memD.log & 
                    
