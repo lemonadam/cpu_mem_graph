@@ -8,6 +8,7 @@ for ((j=1;j<=$device_num;j++));
     do
     device_serialname=` adb devices | grep "device"$ | awk '{print $1}' | sed -n "${j}p"`
     rm -rf ${device_serialname}_*
+    rm -rf ${device_serialname}_*
     cp -rf cpu.html ${device_serialname}_cpu.html
     htmlname=${device_serialname}_cpu.html
     cp -rf mem.html ${device_serialname}_mem.html
@@ -47,6 +48,7 @@ do
             echo "deviceid--->"$device_serialname"----->获取数据条数 $i"
             cpu_S=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$5} END {print s}'`
             cpu_S_3=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$4} END {print s}'`
+            cpu_S_7=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$6} END {print s}'`
             echo $cpu_S
             if [[ "$cpu_S" == "S" ]]; then
                 #statements
@@ -54,6 +56,8 @@ do
                 echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$4} END {print s}'`"]," >> ${device_serialname}_cpu.log &
             elif [[ "$cpu_S_3" == "S" ]]; then
                 echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$3} END {print s}'`"]," >> ${device_serialname}_cpu.log &
+            elif [[ "$cpu_S_7" == "S" ]]; then
+                echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$5} END {print s}'`"]," >> ${device_serialname}_cpu.log &
             else
                 echo "[$i,0]," >> ${device_serialname}_cpu.log
                 sleep $delay 
@@ -122,6 +126,7 @@ do
         else
             if [ "$j" -eq "$device_num" ]
                 then
+                   cpu_S_7=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$6} END {print s}'`
                    cpu_S=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$5} END {print s}'`
                    cpu_S_3=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$4} END {print s}'`
                    # echo $cpu_S
@@ -131,6 +136,8 @@ do
                         echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$4} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                    elif [[ "$cpu_S_3" == "S" ]]; then
                         echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$3} END {print s}'`"]," >> ${device_serialname}_cpu.log &
+                   elif [[ "$cpu_S_7" == "S" ]]; then
+                        echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$5} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                    else
                         echo "[$i,0]," >> ${device_serialname}_cpu.log
                         sleep $delay 
@@ -181,6 +188,7 @@ do
                     # '"$memD_tmp"'\
                     # ' $htmlname_mem
             else
+                cpu_S_7=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$6} END {print s}'`
                 cpu_S=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$5} END {print s}'`
                 cpu_S_3=`adb -s ${device_serialname} shell top -n 1 -d 0 | grep $1  |awk '{s=$4} END {print s}'`
                 # echo $cpu_S
@@ -190,6 +198,8 @@ do
                     echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$4} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                 elif [[ "$cpu_S_3" == "S" ]]; then
                     echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$3} END {print s}'`"]," >> ${device_serialname}_cpu.log &
+                elif [[ "$cpu_S_7" == "S" ]]; then
+                    echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$5} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                 else
                     echo "[$i,0]," >> ${device_serialname}_cpu.log
                     sleep $delay 
