@@ -208,6 +208,8 @@ do
                     echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$3} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                 elif [[ "$cpu_S_7" == "S" || "$cpu_S" == "R" ]]; then
                     echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$5} END {print s}'`"]," >> ${device_serialname}_cpu.log &
+                elif [[ "$cpu_S_8" == "S" || "$cpu_S" == "R" ]]; then
+                    echo "["$i","`adb -s ${device_serialname} shell top -n 1 -d $2 | grep $1  |awk '{s+=$9} END {print s}'`"]," >> ${device_serialname}_cpu.log &
                 else
                     echo "[$i,0]," >> ${device_serialname}_cpu.log
                     sleep $delay 
